@@ -9,6 +9,7 @@ import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import { Title } from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
 import useSignIn from "hooks/api/useSignIn";
+import { UserData } from "types/userTypes";
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -33,7 +34,7 @@ export default function SignIn() {
     setIsSubmitDisabled(true);
 
     try {
-      const userData = await signIn(form);
+      const userData: UserData = await signIn(form);
       toast.success("Login feito com sucesso!");
 
       localStorage.setItem("user", JSON.stringify(userData));
