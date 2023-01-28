@@ -13,29 +13,21 @@ export type InputBoxProps = {
   placeholder: string;
   type?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  value: string;
+  value?: string;
   height?: string;
   hasCheckBox?: boolean;
   hasIcon?: boolean | JSX.Element;
   regex?: RegExp;
   required?: boolean
+  step?: string;
 };
 export default function InputBox({
-  data: { name, placeholder, type, onChange, value, height = "60px", hasCheckBox, hasIcon, regex, required },
+  data: { name, placeholder, type, onChange, value, height = "60px", hasCheckBox, hasIcon, regex, step, required },
 }: {
   data: InputBoxProps;
 }) {
   const [isChecked, setIsChecked] = useState(false);
   const [isValidPattern, setIsValidPattern] = useState(true);
-
-  useEffect(() => {
-    if (value?.match(regex as RegExp) || value?.length === 0) {
-      setIsValidPattern(true);
-    }
-    else {
-      setIsValidPattern(false);
-    }
-  }, [value, regex]);
 
   if (hasIcon) {
     switch (name) {
@@ -72,6 +64,7 @@ export default function InputBox({
         placeholder={placeholder}
         onChange={onChange}
         required={required}
+        step={step}
       />
       {!isValidPattern && (
         <ShowIcon color={"rgb(190, 0, 0)"}>

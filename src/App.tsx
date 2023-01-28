@@ -31,49 +31,29 @@ export default function App() {
             pauseOnHover
             theme="colored"
           />
-          <Background>
-            <BrowserRouter>
-              <Routes>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/sign-up"
+                element={<SignUp />}
+              />
+              <Route
+                path="/sign-in"
+                element={<SignIn />}
+              />
+              <Route element={<ProtectedRoute noTokenPath={"/sign-in"} />}>
                 <Route
-                  path="/sign-up"
-                  element={<SignUp />}
+                  path="/"
+                  element={<Home />}
                 />
-                <Route
-                  path="/sign-in"
-                  element={<SignIn />}
-                />
-                <Route
-                  element={
-                    <ProtectedRoute
-                      noTokenPath={"/sign-in"}
-                    />
-                  }
-                >
-                  <Route
-                    path="/"
-                    element={<Home />}
-                  />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </Background>
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </UserContextProvider>
       </QueryClientProvider>
     </>
   );
 }
-
-function Background({ children }: { children: ReactNode }) {
-  return <Layer1>{children}</Layer1>;
-}
-
-const Layer1 = styled.div`
-  & {
-    width: 100vw;
-
-    background-color: var(--background-color);
-  }
-`;
 
 const StyledToastContainer = styled(ToastContainer)`
   display: flex;

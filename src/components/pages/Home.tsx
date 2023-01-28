@@ -1,18 +1,25 @@
+import { AxiosError, HttpStatusCode } from "axios";
+import LoadingPlaceholder from "components/others/LoadingPlaceholder";
+import { useQuery } from "react-query";
+import { getObjective } from "services/objectiveServices";
 import styled from "styled-components";
+import Objective from "./Objective";
 
 export default function Home() {
-  return <Container></Container>;
+  const { isLoading, error } = useQuery("objectives", getObjective, {
+    retry: false,
+    onError: (err: AxiosError) => err
+  });
+
+  if (isLoading) {
+    return <LoadingPlaceholder />;
+  }
+
+  if(error?.response?.status === HttpStatusCode.NotFound) {
+    return <Objective hasNoObjective={true} />;
+  }
+
+  return <Container></Container>; //TODO: Redirect to Sheets Page
 }
 
-const Container = styled.div`
-  flex-direction: column;
-
-  gap: 20px;
-
-  img {
-    width: 100px;
-  }
-  img:hover {
-    cursor: pointer;
-  }
-`;
+const Container = styled.main``;

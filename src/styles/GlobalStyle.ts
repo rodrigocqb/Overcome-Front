@@ -112,8 +112,8 @@ table {
     display: flex;
 	  flex-direction: column;
 	  align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: var(--doc-heigth);
     padding: 0 15px;
   }
 `;
