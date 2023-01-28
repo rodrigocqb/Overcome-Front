@@ -5,10 +5,11 @@ export default function ProtectedRoute({
   noTokenPath = "/",
   children,
 }: {
-  token: string | null;
+  token: string | undefined;
   noTokenPath?: string;
   children?: React.ReactElement;
 }) {
+
   if (!token) {
     return (
       <Navigate

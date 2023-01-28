@@ -6,7 +6,7 @@ export type UserStates = {
 export type UserData = {
   id: number;
   name: string;
-  token: string
+  token: string;
 };
 
 export type OAuthData = {

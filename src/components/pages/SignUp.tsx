@@ -4,11 +4,11 @@ import { useUserContext } from "contexts/UserContext";
 import React, { useState } from "react";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
-import { postSignUp } from "services/userServices";
 import styled from "styled-components";
 import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import { Title } from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
+import useSignUp from "hooks/api/useSignUp";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -16,6 +16,8 @@ export default function SignUp() {
     email: "",
     password: "",
   });
+
+  const { signUp } = useSignUp();
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
@@ -32,13 +34,13 @@ export default function SignUp() {
     setIsSubmitDisabled(true);
 
     try {
-      await postSignUp(form);
+      await signUp(form);
+      toast.success("Cadastro feito com sucesso!");
 
       setIsSubmitDisabled(false);
 
-      navigate("/");
-    }
-    catch (error) {
+      navigate("/sign-in");
+    } catch (error) {
       toast.error("Houve um erro ao tentar se cadastrar!");
       setIsSubmitDisabled(false);
     }
@@ -54,7 +56,7 @@ export default function SignUp() {
       value: form.name,
       hasIcon: true,
       type: "text",
-      required: true
+      required: true,
     },
     {
       name: "email",
@@ -66,7 +68,7 @@ export default function SignUp() {
       hasIcon: true,
       type: "email",
       height: "60px",
-      required: true
+      required: true,
     },
     {
       name: "password",
@@ -79,7 +81,7 @@ export default function SignUp() {
       hasCheckBox: true,
       hasIcon: true,
       height: "60px",
-      required: true
+      required: true,
     },
   ];
 
@@ -101,7 +103,7 @@ export default function SignUp() {
         <GoogleButton
           onClick={async () => {
             await getTokenWithGoogleOAuth();
-            navigate("/");
+            navigate("/home");
           }}
         ></GoogleButton>
       </OAuthButtons>

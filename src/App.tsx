@@ -1,72 +1,63 @@
 import { ReactNode } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-
-import Counter from "./components/common/Counter/Counter";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-
-import { useAppContext } from "./contexts/AppContext";
 import Home from "./components/pages/Home";
 import SignUp from "components/pages/SignUp";
 import SignIn from "components/pages/SignIn";
 import useToken from "hooks/useToken";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import UserContextProvider from "contexts/UserContext";
+import { GlobalStyle } from "styles/GlobalStyle";
 
 export default function App() {
-  const { counter } = useAppContext();
   const token = useToken();
 
   return (
     <>
-      {counter?.show && <Counter />}
-      <StyledToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
-      <Background>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={<SignUp />}
-            />
-            <Route
-              path="/sign-in"
-              element={<SignIn />}
-            />
-            <Route
-              path="/sign-up"
-              element={<Home />}
-            />
-            <Route
-              element={
-                <ProtectedRoute
-                  token={token}
-                  noTokenPath={"/"}
+      <UserContextProvider>
+        <GlobalStyle />
+        <StyledToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+        <Background>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={<SignUp />}
+              />
+              <Route
+                path="/sign-in"
+                element={<SignIn />}
+              />
+              <Route
+                element={
+                  <ProtectedRoute
+                    token={token}
+                    noTokenPath={"/"}
+                  />
+                }
+              >
+                <Route
+                  path="/home"
+                  element={<Home />}
                 />
-              }
-            >
-              <Route
-                path="/user"
-                element={<></>}
-              />
-              <Route
-                path="*"
-                element={<Navigate to="/sign-in" />}
-              />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Background>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </Background>
+      </UserContextProvider>
     </>
   );
 }
@@ -90,9 +81,8 @@ const StyledToastContainer = styled(ToastContainer)`
     width: 240px;
   }
   .Toastify__toast {
-
   }
   .Toastify__close-button {
     width: 20px;
-}
+  }
 `;

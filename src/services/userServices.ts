@@ -1,16 +1,28 @@
 import { AxiosResponse } from "axios";
+import { UserData } from "types/userTypes";
 import { post } from "../helpers/request";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-export function postSignIn(body: { email: string; password: string }) {
-  return post(`${BASE_URL}/users/sign-in`, body);
+export async function postSignIn(body: {
+  email: string;
+  password: string;
+}): Promise<AxiosResponse<UserData, any>> {
+  const response = await post("/users/sign-in", body);
+  return response.data;
 }
 
-export function postSignUp(body: { name: string; email: string; password: string }) {
-  return post(`${BASE_URL}/users/sign-up`, body);
+export async function postSignUp(body: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  const response = await post("/users/sign-up", body);
+  return response.data;
 }
 
-export function postOAuth(body: { name: string; email: string }): Promise<AxiosResponse<{token: string}, any>> {
-  return post(`${BASE_URL}/users/oauth`, body);
+export async function postOAuth(body: {
+  name: string;
+  email: string;
+}): Promise<AxiosResponse<UserData, any>> {
+  const response = await post("/users/oauth", body);
+  return response.data;
 }

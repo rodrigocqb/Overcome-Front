@@ -2,19 +2,21 @@ import Form from "components/common/Form/Form";
 import { InputBoxProps } from "components/common/Form/InputBox";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { postSignIn } from "services/userServices";
 import styled from "styled-components";
 import GoogleButton from "react-google-button";
 import { useUserContext } from "contexts/UserContext";
 import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import { Title } from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
+import useSignIn from "hooks/api/useSignIn";
 
 export default function SignIn() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const { signIn } = useSignIn();
 
   const { getTokenWithGoogleOAuth } = useUserContext();
 
@@ -31,7 +33,8 @@ export default function SignIn() {
     setIsSubmitDisabled(true);
 
     try {
-      const userData = await postSignIn(form);
+      const userData = await signIn(form);
+      toast.success("Login feito com sucesso!");
 
       localStorage.setItem("user", JSON.stringify(userData));
 
@@ -91,7 +94,7 @@ export default function SignIn() {
         <GoogleButton
           onClick={async () => {
             await getTokenWithGoogleOAuth();
-            navigate("/");
+            navigate("/home");
           }}
         ></GoogleButton>
       </OAuthButtons>
