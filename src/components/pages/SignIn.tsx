@@ -41,7 +41,7 @@ export default function SignIn() {
 
       setIsSubmitDisabled(false);
 
-      navigate("/home");
+      navigate("/");
     }
     catch (error) {
       toast.error("Houve um erro ao tentar fazer login!");
@@ -88,14 +88,15 @@ export default function SignIn() {
       />
 
       <RedirectTo>
-        <Link to={"/"}>Não tem uma conta ainda? Cadastre-se!</Link>
+        <Link to={"/sign-up"}>Não tem uma conta ainda? Cadastre-se!</Link>
       </RedirectTo>
 
       <OAuthButtons>
         <GoogleButton
           onClick={async () => {
             await getTokenWithGoogleOAuth();
-            navigate("/home");
+            toast.success("Login feito com sucesso!");
+            navigate("/");
           }}
         ></GoogleButton>
       </OAuthButtons>

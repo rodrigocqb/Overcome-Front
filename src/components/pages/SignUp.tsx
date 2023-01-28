@@ -40,7 +40,8 @@ export default function SignUp() {
       setIsSubmitDisabled(false);
 
       navigate("/sign-in");
-    } catch (error) {
+    }
+    catch (error) {
       toast.error("Houve um erro ao tentar se cadastrar!");
       setIsSubmitDisabled(false);
     }
@@ -103,7 +104,8 @@ export default function SignUp() {
         <GoogleButton
           onClick={async () => {
             await getTokenWithGoogleOAuth();
-            navigate("/home");
+            toast.success("Login feito com sucesso!");
+            navigate("/");
           }}
         ></GoogleButton>
       </OAuthButtons>

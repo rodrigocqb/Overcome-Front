@@ -1,14 +1,14 @@
+import useToken from "hooks/useToken";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoute({
-  token,
-  noTokenPath = "/",
+  noTokenPath = "/sign-in",
   children,
 }: {
-  token: string | undefined;
   noTokenPath?: string;
   children?: React.ReactElement;
 }) {
+  const token = useToken();
 
   if (!token) {
     return (

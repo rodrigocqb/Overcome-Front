@@ -5,14 +5,12 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import Home from "./components/pages/Home";
 import SignUp from "components/pages/SignUp";
 import SignIn from "components/pages/SignIn";
-import useToken from "hooks/useToken";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import UserContextProvider from "contexts/UserContext";
 import { GlobalStyle } from "styles/GlobalStyle";
 
 export default function App() {
-  const token = useToken();
 
   return (
     <>
@@ -34,7 +32,7 @@ export default function App() {
           <BrowserRouter>
             <Routes>
               <Route
-                path="/"
+                path="/sign-up"
                 element={<SignUp />}
               />
               <Route
@@ -44,13 +42,12 @@ export default function App() {
               <Route
                 element={
                   <ProtectedRoute
-                    token={token}
-                    noTokenPath={"/"}
+                    noTokenPath={"/sign-in"}
                   />
                 }
               >
                 <Route
-                  path="/home"
+                  path="/"
                   element={<Home />}
                 />
               </Route>
