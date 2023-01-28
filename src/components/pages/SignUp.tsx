@@ -1,7 +1,7 @@
 import Form from "components/common/Form/Form";
 import { InputBoxProps } from "components/common/Form/InputBox";
 import { useUserContext } from "contexts/UserContext";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -21,9 +21,15 @@ export default function SignUp() {
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  const { getTokenWithGoogleOAuth } = useUserContext();
+  const { getTokenWithGoogleOAuth, userData } = useUserContext();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData) {
+      return navigate("/");
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
