@@ -8,8 +8,8 @@ import { useUserContext } from "contexts/UserContext";
 import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import { Title } from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
-import useSignIn from "hooks/api/useSignIn";
-import { UserData } from "types/userTypes";
+import { postSignIn } from "services/userServices";
+import { useMutation } from "react-query";
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -17,7 +17,7 @@ export default function SignIn() {
     password: "",
   });
 
-  const { signIn } = useSignIn();
+  const signInMutation = useMutation(() => postSignIn(form));
 
   const { getTokenWithGoogleOAuth, userData } = useUserContext();
 
@@ -40,10 +40,10 @@ export default function SignIn() {
     setIsSubmitDisabled(true);
 
     try {
-      const userData: UserData = await signIn(form);
+      const user = await signInMutation.mutateAsync();
       toast.success("Login feito com sucesso!");
 
-      localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(user));
 
       setIsSubmitDisabled(false);
 

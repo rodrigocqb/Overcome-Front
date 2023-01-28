@@ -8,7 +8,8 @@ import styled from "styled-components";
 import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import { Title } from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
-import useSignUp from "hooks/api/useSignUp";
+import { postSignUp } from "services/userServices";
+import { useMutation } from "react-query";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -17,7 +18,7 @@ export default function SignUp() {
     password: "",
   });
 
-  const { signUp } = useSignUp();
+  const signUpMutation = useMutation(() => postSignUp(form));
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
@@ -40,7 +41,7 @@ export default function SignUp() {
     setIsSubmitDisabled(true);
 
     try {
-      await signUp(form);
+      await signUpMutation.mutateAsync();
       toast.success("Cadastro feito com sucesso!");
 
       setIsSubmitDisabled(false);

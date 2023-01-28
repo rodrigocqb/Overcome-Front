@@ -16,7 +16,7 @@ export async function postSignUp(body: {
   password: string;
 }) {
   const response = await post("/users/sign-up", body);
-  return response.data;
+  return response;
 }
 
 export async function postOAuth(body: {

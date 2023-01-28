@@ -9,52 +9,56 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import UserContextProvider from "contexts/UserContext";
 import { GlobalStyle } from "styles/GlobalStyle";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export default function App() {
+  const queryClient = new QueryClient();
 
   return (
     <>
-      <UserContextProvider>
-        <GlobalStyle />
-        <StyledToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-        <Background>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/sign-up"
-                element={<SignUp />}
-              />
-              <Route
-                path="/sign-in"
-                element={<SignIn />}
-              />
-              <Route
-                element={
-                  <ProtectedRoute
-                    noTokenPath={"/sign-in"}
-                  />
-                }
-              >
+      <QueryClientProvider client={queryClient}>
+        <UserContextProvider>
+          <GlobalStyle />
+          <StyledToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+          <Background>
+            <BrowserRouter>
+              <Routes>
                 <Route
-                  path="/"
-                  element={<Home />}
+                  path="/sign-up"
+                  element={<SignUp />}
                 />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </Background>
-      </UserContextProvider>
+                <Route
+                  path="/sign-in"
+                  element={<SignIn />}
+                />
+                <Route
+                  element={
+                    <ProtectedRoute
+                      noTokenPath={"/sign-in"}
+                    />
+                  }
+                >
+                  <Route
+                    path="/"
+                    element={<Home />}
+                  />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </Background>
+        </UserContextProvider>
+      </QueryClientProvider>
     </>
   );
 }
