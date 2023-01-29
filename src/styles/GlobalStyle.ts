@@ -50,8 +50,6 @@ table {
   :root {
     --fontsize: 26px;
 
-    --background-color: #D6C9B6;
-
     --doc-heigth: 100%;
   }
 
@@ -67,7 +65,7 @@ table {
   html,
   body {
     height: var(--doc-heigth);
-    background-color: var(--background-color);
+    background-color: #D6C9B6;
     font-family: 'Lexend Deca', sans-serif;
   }
 

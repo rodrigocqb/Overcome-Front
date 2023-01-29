@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import UserContextProvider from "contexts/UserContext";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Objective from "components/pages/Objective";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -45,6 +46,10 @@ export default function App() {
                 <Route
                   path="/"
                   element={<Home />}
+                />
+                <Route
+                  path="/objective"
+                  element={<Objective />}
                 />
               </Route>
             </Routes>

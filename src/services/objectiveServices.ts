@@ -2,9 +2,10 @@ import { AxiosResponse } from "axios";
 import { createAuthorizationHeader, get, post, put } from "helpers/request";
 import { Objective } from "types/objectiveTypes";
 
-export async function getObjective(): Promise<AxiosResponse<Objective>> {
+export async function getObjective(): Promise<Objective> {
   const config = createAuthorizationHeader();
-  return get("/objectives", config);
+  const response = await get("/objectives", config);
+  return response.data as Objective;
 }
 
 export async function postObjective(
