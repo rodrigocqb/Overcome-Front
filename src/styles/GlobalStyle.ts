@@ -89,12 +89,6 @@ table {
     height: 100%;
   }
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   a {
     text-decoration: none;
     font-weight: 700;

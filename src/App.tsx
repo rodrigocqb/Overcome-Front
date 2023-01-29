@@ -11,6 +11,7 @@ import UserContextProvider from "contexts/UserContext";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Objective from "components/pages/Objective";
+import Exercises from "components/pages/Exercises";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -50,6 +51,10 @@ export default function App() {
                 <Route
                   path="/objective"
                   element={<Objective />}
+                />
+                <Route
+                  path="/exercises"
+                  element={<Exercises />}
                 />
               </Route>
             </Routes>

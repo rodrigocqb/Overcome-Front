@@ -49,7 +49,7 @@ export default function SignUp() {
       navigate("/sign-in");
     }
     catch (error) {
-      toast.error("Houve um erro ao tentar se cadastrar!");
+      toast.error("Uma conta com este email já existe!");
       setIsSubmitDisabled(false);
     }
   }
@@ -122,8 +122,10 @@ export default function SignUp() {
 
 const Container = styled.div`
   & {
+    display: flex;
     flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
     width: calc(100vw - (100vw - 100%));
     height: 100vh;
 

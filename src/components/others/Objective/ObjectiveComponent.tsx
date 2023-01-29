@@ -63,6 +63,7 @@ const Container = styled.div`
 
   div {
     width: 100%;
+    display: flex;
     justify-content: initial;
     align-items: initial;
     flex-direction: column;

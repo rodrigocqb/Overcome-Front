@@ -88,6 +88,9 @@ export default function InputBox({
 
 const Container = styled.div<{ height: string; isValidPattern: boolean }>`
   & {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #ffffff;
     border-radius: 5px;
     height: ${({ height }) => height};

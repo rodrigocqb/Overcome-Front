@@ -18,5 +18,8 @@ export default function LoadingPlaceholder() {
 }
 
 const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: calc(100vh - 50px);
 `;
