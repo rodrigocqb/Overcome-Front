@@ -5,6 +5,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import background from "../../assets/objective/objectiveblur.png";
 import mainBackground from "../../assets/objective/objectivebackground.png";
+import Footer from "components/others/Footer";
 
 export default function Objective({
   hasObjective = true,
@@ -30,6 +31,7 @@ export default function Objective({
               setIsNewUser={setIsNewUser}
             />
           </MainSection>
+          <Footer />
         </Container>
       )}
     </>

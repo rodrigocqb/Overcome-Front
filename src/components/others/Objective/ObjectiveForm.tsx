@@ -6,6 +6,7 @@ import styled from "styled-components";
 import background from "../../../assets/objectiveForm/objectiveFormBgOpacity.png";
 import mainBackground from "../../../assets/objectiveForm/objectiveFormBg.png";
 import Header from "../Header";
+import Footer from "../Footer";
 
 type ObjectiveFormParams = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -117,6 +118,7 @@ export default function ObjectiveForm({
           <SubmitButton>ATUALIZAR OBJETIVO</SubmitButton>
         </Form>
       </MainSection>
+      <Footer />
     </Container>
   );
 }

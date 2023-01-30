@@ -1,5 +1,6 @@
 import ExerciseComponent from "components/others/Exercises/ExerciseComponent";
 import ExerciseForm from "components/others/Exercises/ExerciseForm";
+import Footer from "components/others/Footer";
 import LoadingPlaceholder from "components/others/LoadingPlaceholder";
 import { useQuery } from "react-query";
 import { getExercises } from "services/exerciseServices";
@@ -28,12 +29,13 @@ export default function Exercises() {
       ) : (
         <ExerciseComponent />
       )}
+      <Footer />
     </Container>
   );
 }
 
 const Container = styled.main`
-  height: 90vh;
+  height: 100vh;
 
     span {
         margin-top: 10px;
