@@ -64,7 +64,6 @@ export default function SignIn() {
         setForm({ ...form, email: e.target.value });
       },
       value: form.email,
-      hasIcon: true,
       type: "email",
       height: "45px",
       required: true,
@@ -77,8 +76,6 @@ export default function SignIn() {
         setForm({ ...form, password: e.target.value });
       },
       value: form.password,
-      hasCheckBox: true,
-      hasIcon: true,
       height: "45px",
       required: true,
     },

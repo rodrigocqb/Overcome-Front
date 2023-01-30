@@ -63,7 +63,6 @@ export default function SignUp() {
         setForm({ ...form, name: e.target.value });
       },
       value: form.name,
-      hasIcon: true,
       type: "text",
       height: "45px",
       required: true,
@@ -75,7 +74,6 @@ export default function SignUp() {
         setForm({ ...form, email: e.target.value });
       },
       value: form.email,
-      hasIcon: true,
       type: "email",
       height: "45px",
       required: true,
@@ -88,8 +86,6 @@ export default function SignUp() {
         setForm({ ...form, password: e.target.value });
       },
       value: form.password,
-      hasCheckBox: true,
-      hasIcon: true,
       height: "45px",
       required: true,
     },
