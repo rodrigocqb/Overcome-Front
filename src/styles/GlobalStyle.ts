@@ -103,9 +103,7 @@ table {
   main {
     display: flex;
 	  flex-direction: column;
-	  align-items: center;
     width: 100vw;
     min-height: var(--doc-heigth);
-    padding: 0 15px;
   }
 `;

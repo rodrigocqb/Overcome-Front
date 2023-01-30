@@ -19,5 +19,6 @@ export async function putObjective(
   body: Partial<Objective>,
 ): Promise<AxiosResponse<Objective>> {
   const config = createAuthorizationHeader();
-  return put("/objectives", body, config);
+  const response = await put("/objectives", body, config);
+  return response.data;
 }

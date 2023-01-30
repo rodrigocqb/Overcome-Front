@@ -1,9 +1,11 @@
-import Form from "components/common/Form/Form";
-import { InputBoxProps } from "components/common/Form/InputBox";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { postObjective, putObjective } from "services/objectiveServices";
+import styled from "styled-components";
+import background from "../../../assets/objectiveForm/objectiveFormBgOpacity.png";
+import mainBackground from "../../../assets/objectiveForm/objectiveFormBg.png";
+import Header from "../Header";
 
 type ObjectiveFormParams = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,10 +25,31 @@ export default function ObjectiveForm({
 
   const objectiveMutation = useMutation(() => {
     if (!isNewUser) {
-      return putObjective(form);
+      return putObjective({
+        title: form.title,
+        currentWeight: form.currentWeight * 10,
+        goalWeight: form.goalWeight * 10,
+      });
     }
-    return postObjective(form);
+    return postObjective({
+      title: form.title,
+      currentWeight: form.currentWeight * 10,
+      goalWeight: form.goalWeight * 10,
+    });
   });
+
+  function handleChange({
+    value,
+    name,
+  }: {
+    value: string | number;
+    name: string;
+  }) {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,50 +68,135 @@ export default function ObjectiveForm({
       setShowForm(false);
     }
     catch (error) {
+      toast.dismiss("loading");
       toast.error("Houve um erro ao tentar atualizar seu objetivo!");
       setIsSubmitDisabled(false);
     }
   }
 
-  const inputs: InputBoxProps[] = [
-    {
-      name: "title",
-      placeholder: "Qual o seu principal objetivo?",
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, title: e.target.value });
-      },
-      value: form.title,
-      type: "text",
-      height: "60px",
-    },
-    {
-      name: "currentWeight",
-      type: "number",
-      placeholder: "Insira o seu peso atual",
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, currentWeight: Number(e.target.value) * 10 });
-      },
-      height: "60px",
-      step: "0.1",
-    },
-    {
-      name: "goalWeight",
-      type: "number",
-      placeholder: "Insira o seu peso desejado",
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, goalWeight: Number(e.target.value) * 10 });
-      },
-      height: "60px",
-      step: "0.1",
-    },
-  ];
-
   return (
-    <Form
-      inputs={inputs}
-      handleSubmit={handleSubmit}
-      isSubmitDisabled={isSubmitDisabled}
-      submitButtonText={"Atualizar objetivo"}
-    />
+    <Container>
+      <Header />
+      <MainSection>
+        <Form onSubmit={handleSubmit}>
+          <InputWrapper>
+            <p>Qual o seu principal objetivo?</p>
+            <input
+              name="title"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange({ name: e.target.name, value: e.target.value })
+              }
+              type="text"
+              value={form.title}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <p>Insira o seu peso atual</p>
+            <input
+              name="currentWeight"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange({ name: e.target.name, value: e.target.value })
+              }
+              type="number"
+              step="0.1"
+              value={form.currentWeight}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <p>Insira o seu peso desejado</p>
+            <input
+              name="goalWeight"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange({ name: e.target.name, value: e.target.value })
+              }
+              type="number"
+              step="0.1"
+              value={form.goalWeight}
+            />
+          </InputWrapper>
+          <SubmitButton>ATUALIZAR OBJETIVO</SubmitButton>
+        </Form>
+      </MainSection>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  position: relative;
+  min-height: 100vh;
+  justify-content: center;
+  background-image: url(${background});
+  background-size: cover;
+`;
+
+const MainSection = styled.section`
+  margin-top: 76px;
+  width: 100%;
+  height: calc(100vh - 189px);
+  border-radius: 51px 51px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${mainBackground});
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const InputWrapper = styled.div`
+  width: 286px;
+  margin-bottom: 22px;
+
+  p {
+    font-weight: 500;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    height: 45px;
+    background: rgba(172, 164, 153, 0.66);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 23.5px;
+    color: #ffffff;
+    margin-top: 14px;
+    border: 0px;
+    outline: none;
+    padding: 0 24px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+`;
+
+const SubmitButton = styled.button`
+  margin-top: 61px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  font-weight: 500;
+  width: 286px;
+  height: 45px;
+  background: rgba(168, 72, 47, 0.78);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 23.5px;
+  color: #ffffff;
+  &:hover {
+    filter: brightness(0.8);
+  }
+`;

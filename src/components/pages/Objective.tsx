@@ -1,7 +1,10 @@
+import Header from "components/others/Header";
 import ObjectiveComponent from "components/others/Objective/ObjectiveComponent";
 import ObjectiveForm from "components/others/Objective/ObjectiveForm";
 import { useState } from "react";
 import styled from "styled-components";
+import background from "../../assets/objective/objectiveblur.png";
+import mainBackground from "../../assets/objective/objectivebackground.png";
 
 export default function Objective({
   hasObjective = true,
@@ -12,24 +15,47 @@ export default function Objective({
   const [isNewUser, setIsNewUser] = useState(!hasObjective);
 
   return (
-    <Container>
+    <>
       {showForm ? (
         <ObjectiveForm
           setShowForm={setShowForm}
           isNewUser={isNewUser}
         />
       ) : (
-        <ObjectiveComponent
-          setShowForm={setShowForm}
-          setIsNewUser={setIsNewUser}
-        />
+        <Container>
+          <Header />
+          <MainSection>
+            <ObjectiveComponent
+              setShowForm={setShowForm}
+              setIsNewUser={setIsNewUser}
+            />
+          </MainSection>
+        </Container>
       )}
-    </Container>
+    </>
   );
 }
 
 const Container = styled.main`
-  height: 90vh;
+  position: relative;
+  min-height: 100vh;
   justify-content: center;
-  background-color: #A72E36;
+  background-image: url(${background});
+  background-size: cover;
+`;
+
+const MainSection = styled.section`
+  margin-top: 76px;
+  width: 100%;
+  height: calc(100vh - 189px);
+  border-radius: 51px 51px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${mainBackground});
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

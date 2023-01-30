@@ -11,7 +11,7 @@ export default function LoadingPlaceholder() {
         ariaLabel="blocks-loading"
         wrapperStyle={{}}
         wrapperClass="blocks-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+        colors={["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]}
       />
     </LoaderContainer>
   );
@@ -21,5 +21,6 @@ const LoaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 200px);
+  background-color: transparent;
 `;
