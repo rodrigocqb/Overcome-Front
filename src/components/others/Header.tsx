@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import overcome from "../../assets/overcome.svg";
+import menu from "../../assets/menu.svg";
 
 export default function Header() {
   return (
@@ -7,6 +8,10 @@ export default function Header() {
       <StyledTitle
         src={overcome}
         alt=""
+      />
+      <Menu
+        src={menu}
+        alt="menu"
       />
     </Container>
   );
@@ -28,4 +33,10 @@ const Container = styled.div`
 const StyledTitle = styled.img`
   width: 55%;
   height: 55%;
+`;
+
+const Menu = styled.img`
+  position: absolute;
+  top: 25px;
+  right: 20px;
 `;
