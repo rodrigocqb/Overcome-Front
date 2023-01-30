@@ -6,10 +6,11 @@ import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
-import { Title } from "components/common/Dummy/Title";
+import TitleImage from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
 import { postSignUp } from "services/userServices";
 import { useMutation } from "react-query";
+import background from "../../assets/background.png";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -57,50 +58,51 @@ export default function SignUp() {
   const inputs: InputBoxProps[] = [
     {
       name: "name",
-      placeholder: "Nome",
+      placeholder: "nome",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, name: e.target.value });
       },
       value: form.name,
       hasIcon: true,
       type: "text",
+      height: "45px",
       required: true,
     },
     {
       name: "email",
-      placeholder: "E-mail",
+      placeholder: "e-mail",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, email: e.target.value });
       },
       value: form.email,
       hasIcon: true,
       type: "email",
-      height: "60px",
+      height: "45px",
       required: true,
     },
     {
       name: "password",
       type: "password",
-      placeholder: "Senha",
+      placeholder: "senha",
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, password: e.target.value });
       },
       value: form.password,
       hasCheckBox: true,
       hasIcon: true,
-      height: "60px",
+      height: "45px",
       required: true,
     },
   ];
 
   return (
     <Container>
-      <Title>Overcome</Title>
+      <TitleImage />
       <Form
         inputs={inputs}
         handleSubmit={handleSubmit}
         isSubmitDisabled={isSubmitDisabled}
-        submitButtonText={"Cadastre-se"}
+        submitButtonText={"cadastre-se"}
       />
 
       <RedirectTo>
@@ -134,6 +136,9 @@ const Container = styled.div`
     font-weight: 700;
     font-size: 15px;
     color: #ffffff;
+
+    background-image: url(${background});
+    background-size: cover;
   }
 `;
 
@@ -141,11 +146,13 @@ const RedirectTo = styled.div`
   & {
     height: fit-content;
     padding-top: 20px;
+    text-align: center;
+    width: 236px;
   }
   a {
     font-style: normal;
-    font-weight: 400;
-    font-size: 17px;
+    font-weight: 600;
+    font-size: 15px;
     line-height: 20px;
     text-decoration-line: underline;
   }

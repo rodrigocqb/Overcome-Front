@@ -29,7 +29,6 @@ export default function Form({
 
       <SubmitButton
         disabled={isSubmitDisabled}
-        style={{ height: "50px" }}
       >
         {submitButtonText}{" "}
       </SubmitButton>
@@ -39,7 +38,10 @@ export default function Form({
 
 const Container = styled.form`
   & {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    row-gap: 17px;
 
     width: 100%;
     max-width: 500px;

@@ -6,18 +6,13 @@ export default function SubmitButton({
   children,
   disabled,
   onClick,
-  style,
 }: {
   children: React.ReactNode;
   disabled: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  style: React.CSSProperties;
 }) {
   return (
-    <Container
-      onClick={onClick}
-      style={style}
-    >
+    <Container onClick={onClick}>
       {disabled ? (
         <ThreeDots
           height="13"
@@ -38,19 +33,18 @@ const Container = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: #BF7761;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 15px;
     line-height: 33px;
-    color: #ffffff;
-    width: 100%;
-    height: 60px;
     border: none;
-    border-radius: 5px;
+    border-radius: 23.5px;
     font-weight: 700;
-    font-size: 20px;
+    width: 236px;
+    height: 45px;
+    background: #ffffff;
+    color: #614d4f;
     &:hover {
       filter: brightness(0.8);
     }

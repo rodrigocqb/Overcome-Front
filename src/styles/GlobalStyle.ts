@@ -66,7 +66,7 @@ table {
   body {
     height: var(--doc-heigth);
     background-color: #D6C9B6;
-    font-family: 'Lexend Deca', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   * {

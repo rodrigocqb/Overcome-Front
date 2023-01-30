@@ -1,7 +1,16 @@
 import styled from "styled-components";
+import title from "../../../assets/overcome.svg";
 
-export const Title = styled.h1`
-  font-family: "Permanent Marker", cursive;
+export default function TitleImage() {
+  return (
+    <Title
+      src={title}
+      alt="OVERCOME"
+    />
+  );
+}
+
+const Title = styled.img`
   font-size: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 `;

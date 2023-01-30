@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-
-import { MdImage, MdOutlineEmail, MdPerson } from "react-icons/md";
-import { AiOutlineFileText } from "react-icons/ai";
-import { IoKeyOutline } from "react-icons/io5";
 import { IoMdAlert } from "react-icons/io";
-
-import CheckBox from "./CheckBox";
 
 export type InputBoxProps = {
   name: string;
@@ -18,45 +12,26 @@ export type InputBoxProps = {
   hasCheckBox?: boolean;
   hasIcon?: boolean | JSX.Element;
   regex?: RegExp;
-  required?: boolean
+  required?: boolean;
   step?: string;
 };
 export default function InputBox({
-  data: { name, placeholder, type, onChange, value, height = "60px", hasCheckBox, hasIcon, regex, step, required },
+  data: {
+    name,
+    placeholder,
+    type,
+    onChange,
+    value,
+    height = "60px",
+    step,
+    required,
+  },
 }: {
   data: InputBoxProps;
 }) {
-  const [isChecked, setIsChecked] = useState(false);
-  const [isValidPattern, setIsValidPattern] = useState(true);
-
-  if (hasIcon) {
-    switch (name) {
-    case "name":
-      hasIcon = <MdPerson />;
-      break;
-    case "email":
-      hasIcon = <MdOutlineEmail />;
-      break;
-    case "password":
-      hasIcon = <IoKeyOutline />;
-      break;
-    case "imageUrl":
-      hasIcon = <MdImage />;
-      break;
-    default:
-      hasIcon = <AiOutlineFileText />;
-      break;
-    }
-  }
-
-  type = type === "password" && isChecked ? "text" : type;
 
   return (
-    <Container
-      height={height}
-      isValidPattern={isValidPattern}
-    >
-      {hasIcon && <ShowIcon>{hasIcon}</ShowIcon>}
+    <Container height={height}>
       <input
         name={name}
         type={type ? type : "text"}
@@ -66,75 +41,34 @@ export default function InputBox({
         required={required}
         step={step}
       />
-      {!isValidPattern && (
-        <ShowIcon color={"rgb(190, 0, 0)"}>
-          <IoMdAlert />
-        </ShowIcon>
-      )}
-      {hasCheckBox && (
-        <ShowPassword>
-          <CheckBox
-            size={"35px"}
-            color={"#555555"}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-          />
-          <div>Show</div>
-        </ShowPassword>
-      )}
     </Container>
   );
 }
 
-const Container = styled.div<{ height: string; isValidPattern: boolean }>`
+const Container = styled.div<{ height: string }>`
   & {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffffff;
-    border-radius: 5px;
+    background-color: transparent;
     height: ${({ height }) => height};
-    margin: 10px 0px;
-    border: ${({ isValidPattern }) => (isValidPattern ? "0px" : "3px")} solid rgb(190, 0, 0);
-    padding: 5px 10px;
   }
   input {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 22px;
-    color: #6d6d6d;
+    font-weight: 700;
+    font-size: 15px;
+    color: #ffffff;
     border: none;
     outline: none;
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-    padding: 0px 10px;
+    border-radius: 23.5px;
+    width: 236px;
+    height: 45px;
+    padding: 0px 24px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
   }
   input::placeholder {
-    color: #afafaf;
-  }
-`;
-
-const ShowPassword = styled.div`
-  & {
-    flex-direction: column;
-    width: fit-content;
-  }
-
-  div:nth-child(2) {
-    color: #9f9f9f;
-    font-size: 12px;
-  }
-`;
-
-const ShowIcon = styled.div`
-  & {
-    width: fit-content;
-  }
-
-  * {
-    color: ${({ color }) => (color ? color : "rgb(70, 70, 70)")};
-    font-size: 30px;
+    color: #ffffff;
   }
 `;
