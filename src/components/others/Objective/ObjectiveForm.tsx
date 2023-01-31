@@ -129,6 +129,7 @@ const Container = styled.main`
   justify-content: center;
   background-image: url(${background});
   background-size: cover;
+  background-position: center;
 `;
 
 const MainSection = styled.section`
@@ -142,18 +143,19 @@ const MainSection = styled.section`
   align-items: center;
   background-image: url(${mainBackground});
   background-size: cover;
+  background-position: center;
   position: absolute;
   top: 0;
   left: 0;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
   width: 286px;
   margin-bottom: 22px;
 
@@ -180,8 +182,8 @@ const InputWrapper = styled.div`
   }
 `;
 
-const SubmitButton = styled.button`
-  margin-top: 61px;
+export const SubmitButton = styled.button`
+  margin-top: 39px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import ProtectedRoute from "./components/common/ProtectedRoute";
