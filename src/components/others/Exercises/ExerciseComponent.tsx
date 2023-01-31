@@ -29,4 +29,5 @@ const ExercisesWrapper = styled.div`
   font-size: 19px;
   font-weight: 300;
   color: #FFFFFF;
+  word-break: break-word;
 `;
