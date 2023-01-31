@@ -63,6 +63,13 @@ const Container = styled.div`
   z-index: 3px;
   width: 100vw;
   height: 113px;
+
+  div:first-child {
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
 `;
 
 const IconWrapper = styled.div<{ isCurrentPage: boolean }>`
@@ -75,4 +82,9 @@ const IconWrapper = styled.div<{ isCurrentPage: boolean }>`
   border-radius: 30px;
   box-shadow: ${(props) =>
     props.isCurrentPage ? "0px 4px 4px rgba(0, 0, 0, 0.25)" : ""};
+
+  img {
+    width: 70px;
+    height: 70px;
+  }
 `;
