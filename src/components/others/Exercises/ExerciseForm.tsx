@@ -1,19 +1,44 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { QueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { postExercise } from "services/exerciseServices";
 import styled from "styled-components";
+import { Exercise } from "types/exerciseTypes";
 import { Form, InputWrapper, SubmitButton } from "../Objective/ObjectiveForm";
 
-export default function ExerciseForm() {
+export default function ExerciseForm({
+  queryClient,
+  exercises,
+  setShowForm,
+}: {
+  queryClient: QueryClient;
+  exercises: Exercise[] | undefined;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [form, setForm] = useState({
     name: "",
   });
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  const exerciseMutation = useMutation(() => {
-    return postExercise(form);
-  });
+  const queryData = () => {
+    if (exercises === undefined) {
+      return [];
+    }
+    else {
+      return exercises;
+    }
+  };
+
+  const exerciseMutation = useMutation(
+    () => {
+      return postExercise(form);
+    },
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData("exercises", [...queryData(), data]);
+      },
+    },
+  );
 
   function handleChange({
     value,
@@ -41,17 +66,20 @@ export default function ExerciseForm() {
       await exerciseMutation.mutateAsync();
       toast.dismiss("loading");
       toast.success("Exercício salvo com sucesso!");
+      setForm({ name: "" });
+      setShowForm((old) => !old);
       setIsSubmitDisabled(false);
     }
     catch (error) {
       toast.dismiss("loading");
       toast.error("Esse exercício já existe no banco de dados!");
+      setForm({ name: "" });
       setIsSubmitDisabled(false);
     }
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <InputWrapper>
         <p>Nome do exercício</p>
         <input
@@ -64,10 +92,14 @@ export default function ExerciseForm() {
         />
       </InputWrapper>
       <Button>SALVAR EXERCÍCIO</Button>
-    </Form>
+    </StyledForm>
   );
 }
 
 const Button = styled(SubmitButton)`
   margin-top: 9px;
+`;
+
+const StyledForm = styled(Form)`
+  margin-top: 40px;
 `;

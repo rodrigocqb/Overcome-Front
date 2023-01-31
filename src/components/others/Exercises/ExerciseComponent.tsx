@@ -16,6 +16,7 @@ export default function ExerciseComponent({
 }
 
 const ExercisesWrapper = styled.div`
+  margin-top: 20px;
   width: 314px;
   height: 360px;
   background: rgba(178, 150, 130, 0.69);
@@ -27,4 +28,5 @@ const ExercisesWrapper = styled.div`
   row-gap: 17px;
   font-size: 19px;
   font-weight: 300;
+  color: #FFFFFF;
 `;

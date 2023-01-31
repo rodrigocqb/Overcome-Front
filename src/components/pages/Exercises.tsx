@@ -2,7 +2,7 @@ import ExerciseComponent from "components/others/Exercises/ExerciseComponent";
 import ExerciseForm from "components/others/Exercises/ExerciseForm";
 import Footer from "components/others/Footer";
 import LoadingPlaceholder from "components/others/LoadingPlaceholder";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getExercises } from "services/exerciseServices";
 import styled from "styled-components";
 import background from "../../assets/exercises/exercisesBgOpacity.png";
@@ -16,6 +16,7 @@ export default function Exercises() {
   const { data, isLoading } = useQuery("exercises", getExercises, {
     retry: false,
   });
+  const queryClient = useQueryClient();
 
   if (isLoading) {
     return (
@@ -43,14 +44,23 @@ export default function Exercises() {
         <Title>
           <h1>{showForm ? "ADICIONAR EXERCÍCIO" : "EXERCÍCIOS"}</h1>
         </Title>
-        {showForm && <ExerciseForm />}
-        {data?.length === 0 ? (
-          <SpanWrapper>
-            Não há exercícios cadastrados na plataforma! Cadastre um para
-            começar a usar
-          </SpanWrapper>
+        {showForm ? (
+          <ExerciseForm
+            queryClient={queryClient}
+            exercises={data}
+            setShowForm={setShowForm}
+          />
         ) : (
-          <ExerciseComponent exercises={data} />
+          <>
+            {data?.length === 0 ? (
+              <SpanWrapper>
+                Não há exercícios cadastrados na plataforma! Cadastre um para
+                começar a usar
+              </SpanWrapper>
+            ) : (
+              <ExerciseComponent exercises={data} />
+            )}
+          </>
         )}
       </MainSection>
       <Footer />
@@ -90,7 +100,6 @@ const Title = styled.div`
   width: 100%;
   color: #ffffff;
   margin-top: 27px;
-  margin-bottom: 55px;
   text-align: center;
   width: 237px;
 `;
