@@ -4,22 +4,57 @@ import { useQuery } from "react-query";
 import { getObjective } from "services/objectiveServices";
 import styled from "styled-components";
 import Objective from "./Objective";
+import background from "../../assets/objective/objectiveblur.png";
+import mainBackground from "../../assets/objective/objectivebackground.png";
+import Header from "components/others/Header";
+import Footer from "components/others/Footer";
+import Sheets from "./Sheets";
 
 export default function Home() {
-  const { data, isLoading, error } = useQuery("objectives", getObjective, {
+  const { isLoading, error } = useQuery("objectives", getObjective, {
     retry: false,
     onError: (err: AxiosError) => err,
   });
 
   if (isLoading) {
-    return <LoadingPlaceholder />;
+    return (
+      <Container>
+        <Header />
+        <MainSection>
+          <LoadingPlaceholder />
+        </MainSection>
+        <Footer />
+      </Container>
+    );
   }
 
   if (error?.response?.status === HttpStatusCode.NotFound) {
     return <Objective hasObjective={false} />;
   }
 
-  return <Container></Container>; //TODO: Redirect to Sheets Page
+  return <Sheets />;
 }
 
-const Container = styled.main``;
+const Container = styled.main`
+  position: relative;
+  min-height: 100vh;
+  justify-content: center;
+  background-image: url(${background});
+  background-size: cover;
+`;
+
+const MainSection = styled.section`
+  margin-top: 76px;
+  width: 100%;
+  height: calc(100vh - 189px);
+  border-radius: 51px 51px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${mainBackground});
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;

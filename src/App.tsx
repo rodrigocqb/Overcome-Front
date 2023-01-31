@@ -11,6 +11,7 @@ import { GlobalStyle } from "styles/GlobalStyle";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Objective from "components/pages/Objective";
 import Exercises from "components/pages/Exercises";
+import Sheets from "components/pages/Sheets";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -54,6 +55,10 @@ export default function App() {
                 <Route
                   path="/exercises"
                   element={<Exercises />}
+                />
+                <Route
+                  path="/sheets"
+                  element={<Sheets />}
                 />
               </Route>
             </Routes>

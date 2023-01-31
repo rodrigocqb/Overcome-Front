@@ -104,7 +104,7 @@ const Title = styled.div`
   width: 237px;
 `;
 
-const SpanWrapper = styled.span`
+export const SpanWrapper = styled.span`
   font-size: 15px;
   color: #ffffff;
   width: 243px;
@@ -112,7 +112,7 @@ const SpanWrapper = styled.span`
   margin-top: 17px;
 `;
 
-const ButtonWrapper = styled.div<{ showForm: boolean }>`
+export const ButtonWrapper = styled.div<{ showForm: boolean }>`
   display: flex;
   align-items: center;
   color: #ffffff;
