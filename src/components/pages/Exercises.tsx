@@ -41,7 +41,7 @@ export default function Exercises() {
           <p>adicionar novo exercício</p>
         </ButtonWrapper>
         <Title>
-          <h1>EXERCÍCIOS</h1>
+          <h1>{showForm ? "ADICIONAR EXERCÍCIO" : "EXERCÍCIOS"}</h1>
         </Title>
         {showForm && <ExerciseForm />}
         {data?.length === 0 ? (
@@ -92,6 +92,7 @@ const Title = styled.div`
   margin-top: 27px;
   margin-bottom: 55px;
   text-align: center;
+  width: 237px;
 `;
 
 const SpanWrapper = styled.span`
