@@ -108,9 +108,9 @@ const Title = styled.div`
 `;
 
 const Wrapper = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   height: fit-content;
   min-height: 448px;
-  `;
+`;

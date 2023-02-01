@@ -12,3 +12,9 @@ export async function postExercise(body: Partial<Exercise>) {
   const response = await post("/exercises", body, config);
   return response.data;
 }
+
+export async function searchExercises(searchParam: string): Promise<Exercise[]> {
+  const config = createAuthorizationHeader();
+  const response = await get(`/exercises/${searchParam}`, config);
+  return response.data;
+}

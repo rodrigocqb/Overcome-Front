@@ -1,5 +1,6 @@
 import Footer from "components/others/Footer";
 import Header from "components/others/Header";
+import SheetExercisesContainer from "components/others/SheetExercisesForm/SheetExercisesContainer";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -18,7 +19,11 @@ export default function SheetExercisesForm() {
   return (
     <Container>
       <Header />
-      <MainSection></MainSection>
+      <MainSection>
+        <Wrapper>
+          <SheetExercisesContainer name={sheetTitle} />
+        </Wrapper>
+      </MainSection>
       <Footer />
     </Container>
   );
@@ -39,8 +44,16 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #6c9db2;
   position: absolute;
   top: 0;
   left: 0;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
 `;
