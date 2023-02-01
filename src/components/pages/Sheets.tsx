@@ -5,7 +5,7 @@ import Footer from "components/others/Footer";
 import { useState } from "react";
 import { ButtonWrapper, SpanWrapper } from "./Exercises";
 import SheetsContainer from "components/others/Sheets/SheetsContainer";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getSheets } from "services/sheetServices";
 import LoadingPlaceholder from "components/others/LoadingPlaceholder";
 
@@ -13,6 +13,8 @@ export default function Sheets() {
   const [showForm, setShowForm] = useState(false);
 
   const { data, isLoading } = useQuery("sheets", getSheets);
+
+  const queryClient = useQueryClient();
 
   if (isLoading) {
     return (
@@ -45,7 +47,9 @@ export default function Sheets() {
             Você não possui fichas cadastradas. Crie uma para começar a usar!
           </SpanWrapper>
         ) : (
-          <SheetsContainer sheets={data} />
+          <SheetsContainer
+            sheets={data}
+            queryClient={queryClient} />
         )}
       </MainSection>
       <Footer />
