@@ -36,7 +36,7 @@ export default function SheetWrapper({
   async function handleDelete() {
     Swal.fire({
       title: "Tem certeza?",
-      text: "Você não pode reverter essa ação!",
+      text: `Você realmente quer apagar a ficha "${title}"?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -90,6 +90,8 @@ const SheetTitle = styled.div`
   color: #ffffff;
   max-width: 211px;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const SheetDate = styled.div`
