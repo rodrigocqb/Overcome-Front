@@ -3,6 +3,7 @@ import { QueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { deleteSheet } from "services/sheetServices";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { SheetWithExercises } from "types/sheetTypes";
 
 type SheetWrapperParams = {
@@ -20,9 +21,11 @@ export default function SheetWrapper({
 }: SheetWrapperParams) {
   const deleteSheetMutation = useMutation(() => deleteSheet(id), {
     onSuccess: () => {
-      queryClient.setQueryData("sheets", filterQueryData());
+      queryClient.setQueryData("sheets", newData);
     },
   });
+
+  const newData = filterQueryData();
 
   function filterQueryData() {
     const data: SheetWithExercises[] | undefined =
@@ -31,17 +34,30 @@ export default function SheetWrapper({
   }
 
   async function handleDelete() {
-    toast.loading("Enviando dados", { toastId: "loading" });
+    Swal.fire({
+      title: "Tem certeza?",
+      text: "Você não pode reverter essa ação!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, quero apagar!",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        toast.loading("Enviando dados", { toastId: "loading" });
 
-    try {
-      await deleteSheetMutation.mutateAsync();
-      toast.dismiss("loading");
-      toast.success("Ficha deletada com sucesso!");
-    }
-    catch (error) {
-      toast.dismiss("loading");
-      toast.error("Houve um erro ao tentar apagar a ficha!");
-    }
+        try {
+          await deleteSheetMutation.mutateAsync();
+          toast.dismiss("loading");
+          toast.success("Ficha deletada com sucesso!");
+        }
+        catch (error) {
+          toast.dismiss("loading");
+          toast.error("Houve um erro ao tentar apagar a ficha!");
+        }
+      }
+    });
   }
 
   return (
@@ -50,7 +66,7 @@ export default function SheetWrapper({
       <SheetDate>
         <p>{dayjs(createdAt).format("DD/MM/YY")}</p>
       </SheetDate>
-      <DeleteButton onClick={handleDelete} >X</DeleteButton>
+      <DeleteButton onClick={handleDelete}>X</DeleteButton>
     </Wrapper>
   );
 }

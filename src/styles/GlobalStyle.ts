@@ -84,11 +84,6 @@ table {
     height: 100%;
   }
 
-  button {
-    width: 100%;
-    height: 100%;
-  }
-
   a {
     text-decoration: none;
     font-weight: 700;
