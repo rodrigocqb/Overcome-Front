@@ -32,36 +32,38 @@ export default function Exercises() {
     <Container>
       <Header />
       <MainSection>
-        <ButtonWrapper
-          showForm={showForm}
-          onClick={() => {
-            setShowForm(!showForm);
-          }}
-        >
-          <div>+</div>
-          <p>adicionar novo exercício</p>
-        </ButtonWrapper>
-        <Title>
-          <h1>{showForm ? "ADICIONAR EXERCÍCIO" : "EXERCÍCIOS"}</h1>
-        </Title>
-        {showForm ? (
-          <ExerciseForm
-            queryClient={queryClient}
-            exercises={data}
-            setShowForm={setShowForm}
-          />
-        ) : (
-          <>
-            {data?.length === 0 ? (
-              <SpanWrapper>
+        <Wrapper>
+          <ButtonWrapper
+            showForm={showForm}
+            onClick={() => {
+              setShowForm(!showForm);
+            }}
+          >
+            <div>+</div>
+            <p>adicionar novo exercício</p>
+          </ButtonWrapper>
+          <Title>
+            <h1>{showForm ? "ADICIONAR EXERCÍCIO" : "EXERCÍCIOS"}</h1>
+          </Title>
+          {showForm ? (
+            <ExerciseForm
+              queryClient={queryClient}
+              exercises={data}
+              setShowForm={setShowForm}
+            />
+          ) : (
+            <>
+              {data?.length === 0 ? (
+                <SpanWrapper>
                 Não há exercícios cadastrados na plataforma! Cadastre um para
                 começar a usar
-              </SpanWrapper>
-            ) : (
-              <ExerciseComponent exercises={data} />
-            )}
-          </>
-        )}
+                </SpanWrapper>
+              ) : (
+                <ExerciseComponent exercises={data} />
+              )}
+            </>
+          )}
+        </Wrapper>
       </MainSection>
       <Footer />
     </Container>
@@ -85,6 +87,7 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-image: url(${mainBackground});
   background-size: cover;
   background-position: center;
@@ -92,6 +95,13 @@ const MainSection = styled.section`
   top: 0;
   left: 0;
   overflow-y: scroll;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
 `;
 
 const Title = styled.div`
@@ -117,7 +127,6 @@ export const ButtonWrapper = styled.div<{ showForm: boolean }>`
   align-items: center;
   color: #ffffff;
   font-size: 15px;
-  margin-top: 79px;
 
   div {
     padding-top: 4px;

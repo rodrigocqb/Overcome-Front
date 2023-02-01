@@ -31,39 +31,42 @@ export default function Sheets() {
     <Container>
       <Header />
       <MainSection>
-        <ButtonWrapper
-          showForm={showForm}
-          onClick={() => {
-            setShowForm(!showForm);
-          }}
-        >
-          <div>+</div>
-          <p>criar nova ficha</p>
-        </ButtonWrapper>
-        <Title>
-          <h1>{showForm ? "CRIAR NOVA FICHA" : "FICHAS DE TREINO"}</h1>
-        </Title>
-        {showForm ? (
-          <SheetForm
-            queryClient={queryClient}
-            sheets={data}
-            setShowForm={setShowForm}
-          />
-        ) : (
-          <>
-            {data?.length === 0 ? (
-              <SpanWrapper>
-                Você não possui fichas cadastradas. Crie uma para começar a
-                usar!
-              </SpanWrapper>
-            ) : (
-              <SheetsContainer
-                sheets={data}
-                queryClient={queryClient}
-              />
-            )}
-          </>
-        )}
+        <Wrapper>
+          <ButtonWrapper
+            showForm={showForm}
+            onClick={() => {
+              setShowForm(!showForm);
+            }}
+          >
+            <div>+</div>
+            <p>criar nova ficha</p>
+          </ButtonWrapper>
+
+          {showForm ? (
+            <SheetForm
+              queryClient={queryClient}
+              sheets={data}
+              setShowForm={setShowForm}
+            />
+          ) : (
+            <>
+              <Title>
+                <h1>FICHAS DE TREINO</h1>
+              </Title>
+              {data?.length === 0 ? (
+                <SpanWrapper>
+                  Você não possui fichas cadastradas. Crie uma para começar a
+                  usar!
+                </SpanWrapper>
+              ) : (
+                <SheetsContainer
+                  sheets={data}
+                  queryClient={queryClient}
+                />
+              )}
+            </>
+          )}
+        </Wrapper>
       </MainSection>
       <Footer />
     </Container>
@@ -87,6 +90,7 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: #cdc1b1;
   position: absolute;
   top: 0;
@@ -102,3 +106,11 @@ const Title = styled.div`
   text-align: center;
   width: 258px;
 `;
+
+const Wrapper = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  min-height: 448px;
+  `;

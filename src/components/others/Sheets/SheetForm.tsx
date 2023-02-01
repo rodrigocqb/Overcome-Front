@@ -3,6 +3,7 @@ import { QueryClient, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { postSheet } from "services/sheetServices";
+import styled from "styled-components";
 import { SheetWithExercises } from "types/sheetTypes";
 import { Button, StyledForm } from "../Exercises/ExerciseForm";
 import { InputWrapper } from "../Objective/ObjectiveForm";
@@ -64,7 +65,7 @@ export default function SheetForm({
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <SheetFormContainer onSubmit={handleSubmit}>
       <InputWrapper>
         <p>Nome da ficha</p>
         <input
@@ -77,6 +78,10 @@ export default function SheetForm({
         />
       </InputWrapper>
       <Button>ADICIONAR EXERCÍCIOS</Button>
-    </StyledForm>
+    </SheetFormContainer>
   );
 }
+
+const SheetFormContainer = styled(StyledForm)`
+  margin-bottom: 150px;
+`;
