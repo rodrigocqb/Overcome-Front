@@ -96,10 +96,10 @@ export default function ExerciseForm({
   );
 }
 
-const Button = styled(SubmitButton)`
+export const Button = styled(SubmitButton)`
   margin-top: 9px;
 `;
 
-const StyledForm = styled(Form)`
+export const StyledForm = styled(Form)`
   margin-top: 40px;
 `;

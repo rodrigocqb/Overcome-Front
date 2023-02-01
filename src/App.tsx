@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Objective from "components/pages/Objective";
 import Exercises from "components/pages/Exercises";
 import Sheets from "components/pages/Sheets";
+import SheetExercisesForm from "components/pages/SheetExercisesForm";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -59,6 +60,10 @@ export default function App() {
                 <Route
                   path="/sheets"
                   element={<Sheets />}
+                />
+                <Route
+                  path="/sheets/:sheetId"
+                  element={<SheetExercisesForm />}
                 />
               </Route>
             </Routes>

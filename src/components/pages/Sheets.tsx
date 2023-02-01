@@ -8,6 +8,7 @@ import SheetsContainer from "components/others/Sheets/SheetsContainer";
 import { useQuery, useQueryClient } from "react-query";
 import { getSheets } from "services/sheetServices";
 import LoadingPlaceholder from "components/others/LoadingPlaceholder";
+import SheetForm from "components/others/Sheets/SheetForm";
 
 export default function Sheets() {
   const [showForm, setShowForm] = useState(false);
@@ -40,16 +41,28 @@ export default function Sheets() {
           <p>criar nova ficha</p>
         </ButtonWrapper>
         <Title>
-          <h1>FICHAS DE TREINO</h1>
+          <h1>{showForm ? "CRIAR NOVA FICHA" : "FICHAS DE TREINO"}</h1>
         </Title>
-        {data?.length === 0 ? (
-          <SpanWrapper>
-            Você não possui fichas cadastradas. Crie uma para começar a usar!
-          </SpanWrapper>
-        ) : (
-          <SheetsContainer
+        {showForm ? (
+          <SheetForm
+            queryClient={queryClient}
             sheets={data}
-            queryClient={queryClient} />
+            setShowForm={setShowForm}
+          />
+        ) : (
+          <>
+            {data?.length === 0 ? (
+              <SpanWrapper>
+                Você não possui fichas cadastradas. Crie uma para começar a
+                usar!
+              </SpanWrapper>
+            ) : (
+              <SheetsContainer
+                sheets={data}
+                queryClient={queryClient}
+              />
+            )}
+          </>
         )}
       </MainSection>
       <Footer />
