@@ -12,7 +12,7 @@ export default function SheetExercisesContainer({ name }: { name: string }) {
   const [exerciseData, setExerciseData] = useState<
     (SheetExerciseBody & { name: string }) | null
       >(null);
-  console.log(sheetExercises);
+
   return (
     <Container>
       <SheetName>{name}</SheetName>
@@ -28,6 +28,8 @@ export default function SheetExercisesContainer({ name }: { name: string }) {
                   weight={value.weight}
                   reps={value.reps}
                   sets={value.sets}
+                  setSheetExercises={setSheetExercises}
+                  exerciseId={value.exerciseId}
                 />
               ))}
             </>
@@ -79,6 +81,7 @@ const ExercisesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 9px;
+  overflow-y: scroll;
 `;
 
 const SaveButton = styled.div`

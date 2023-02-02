@@ -1,17 +1,34 @@
 import styled from "styled-components";
-import { SheetExerciseData } from "types/sheetTypes";
+import { SheetExerciseBody, SheetExerciseData } from "types/sheetTypes";
+
+type SheetExerciseComponentParams = SheetExerciseData & {
+  setSheetExercises: React.Dispatch<
+    React.SetStateAction<
+      (SheetExerciseBody & {
+        name: string;
+      })[]
+    >
+  >;
+  exerciseId: number;
+};
 
 export default function SheetExercise({
   name,
   weight,
   reps,
   sets,
-}: SheetExerciseData) {
+  setSheetExercises,
+  exerciseId,
+}: SheetExerciseComponentParams) {
+  function deleteExercise() {
+    setSheetExercises((old) => old.filter((v) => v.exerciseId !== exerciseId));
+  }
+
   return (
     <SheetExerciseContainer>
       <NameAndButtonWrapper>
         <h1>{name}</h1>
-        <span>X</span>
+        <span onClick={deleteExercise}>X</span>
       </NameAndButtonWrapper>
       <ExerciseData>
         <div>
@@ -36,7 +53,7 @@ export default function SheetExercise({
 
 export const SheetExerciseContainer = styled.div`
   width: 268px;
-  height: 73px;
+  min-height: 73px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px 20px 12px 20px;

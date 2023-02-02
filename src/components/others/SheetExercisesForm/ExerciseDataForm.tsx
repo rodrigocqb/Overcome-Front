@@ -44,6 +44,7 @@ export default function ExerciseDataForm({
 
   function saveExercise() {
     setSheetExercises((old) => [...old, exerciseData]);
+    setExerciseData(null);
   }
 
   function showPlaceholder(value: number) {
