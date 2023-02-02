@@ -1,4 +1,5 @@
 import background from "../../assets/sheets/sheetsBgOpacity.png";
+import mainBackground from "../../assets/sheets/sheetsBg.png";
 import styled from "styled-components";
 import Header from "components/others/Header";
 import Footer from "components/others/Footer";
@@ -77,9 +78,11 @@ const Container = styled.main`
   position: relative;
   min-height: 100vh;
   justify-content: center;
+  background-color: #E5DED6;
   background-image: url(${background});
-  background-size: cover;
-  background-position: center;
+  background-size: 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
 `;
 
 const MainSection = styled.section`
@@ -92,6 +95,10 @@ const MainSection = styled.section`
   align-items: center;
   justify-content: center;
   background-color: #cdc1b1;
+  background-image: url(${mainBackground});
+  background-size: 100%;
+  background-position: left 0 top -76px;
+  background-repeat: no-repeat;
   position: absolute;
   top: 0;
   left: 0;
