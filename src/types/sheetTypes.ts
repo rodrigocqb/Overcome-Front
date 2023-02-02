@@ -31,3 +31,7 @@ export type PutSheetExercisesParams = {
   sheetId: number;
   exerciseBody: SheetExerciseBody[];
 };
+
+export type SheetExerciseData = Omit<SheetExerciseBody, "exerciseId"> & {
+  name: string;
+};
