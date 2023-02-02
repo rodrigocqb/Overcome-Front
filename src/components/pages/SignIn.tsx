@@ -3,14 +3,14 @@ import { InputBoxProps } from "components/common/Form/InputBox";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import GoogleButton from "react-google-button";
 import { useUserContext } from "contexts/UserContext";
-import { OAuthButtons } from "components/common/Dummy/OAuthButtons";
 import TitleImage from "components/common/Dummy/Title";
 import { toast } from "react-toastify";
 import { postSignIn } from "services/userServices";
 import { useMutation } from "react-query";
 import background from "../../assets/background.png";
+import { GoogleButton } from "components/common/Dummy/GoogleButton";
+import google from "../../assets/google.svg";
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -95,15 +95,19 @@ export default function SignIn() {
         <Link to={"/sign-up"}>Não tem uma conta ainda? Cadastre-se!</Link>
       </RedirectTo>
 
-      <OAuthButtons>
-        <GoogleButton
-          onClick={async () => {
-            await getTokenWithGoogleOAuth();
-            toast.success("Login feito com sucesso!");
-            navigate("/");
-          }}
-        ></GoogleButton>
-      </OAuthButtons>
+      <GoogleButton
+        onClick={async () => {
+          await getTokenWithGoogleOAuth();
+          toast.success("Login feito com sucesso!");
+          navigate("/");
+        }}
+      >
+        <img
+          src={google}
+          alt="google"
+        />
+        <p>Faça login com o Google</p>
+      </GoogleButton>
     </Container>
   );
 }
