@@ -75,7 +75,7 @@ export const ExerciseData = styled.div`
   }
 `;
 
-const NameAndButtonWrapper = styled.div`
+export const NameAndButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 13px;

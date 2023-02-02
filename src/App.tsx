@@ -13,6 +13,7 @@ import Objective from "components/pages/Objective";
 import Exercises from "components/pages/Exercises";
 import Sheets from "components/pages/Sheets";
 import SheetExercisesForm from "components/pages/SheetExercisesForm";
+import Workout from "components/pages/Workout";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -64,6 +65,10 @@ export default function App() {
                 <Route
                   path="/sheets/:sheetId"
                   element={<SheetExercisesForm />}
+                />
+                <Route
+                  path="/workout/:sheetId"
+                  element={<Workout />}
                 />
               </Route>
             </Routes>

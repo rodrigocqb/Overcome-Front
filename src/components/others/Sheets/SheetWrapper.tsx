@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { QueryClient, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deleteSheet } from "services/sheetServices";
 import styled from "styled-components";
@@ -11,6 +12,7 @@ type SheetWrapperParams = {
   title: string;
   createdAt: Date;
   queryClient: QueryClient;
+  data: SheetWithExercises;
 };
 
 export default function SheetWrapper({
@@ -18,6 +20,7 @@ export default function SheetWrapper({
   title,
   createdAt,
   queryClient,
+  data,
 }: SheetWrapperParams) {
   const deleteSheetMutation = useMutation(() => deleteSheet(id), {
     onSuccess: () => {
@@ -60,10 +63,16 @@ export default function SheetWrapper({
     });
   }
 
+  const navigate = useNavigate();
+
+  function startWorkout() {
+    navigate(`/workout/${id}`, { state: { data } });
+  }
+
   return (
     <Wrapper>
-      <SheetTitle>{title}</SheetTitle>
-      <SheetDate>
+      <SheetTitle onClick={startWorkout}>{title}</SheetTitle>
+      <SheetDate onClick={startWorkout}>
         <p>{dayjs(createdAt).format("DD/MM/YY")}</p>
       </SheetDate>
       <DeleteButton onClick={handleDelete}>X</DeleteButton>

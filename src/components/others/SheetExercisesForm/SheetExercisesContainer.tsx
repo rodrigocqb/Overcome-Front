@@ -101,7 +101,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const SheetName = styled.h1`
+export const SheetName = styled.h1`
   font-weight: 900;
   font-size: 17px;
   color: #ffffff;
@@ -122,7 +122,7 @@ const ExercisesWrapper = styled.div`
   overflow-y: scroll;
 `;
 
-const SaveButton = styled.div`
+export const SaveButton = styled.div`
   margin-top: 26px;
   width: 152px;
   min-height: 45px;

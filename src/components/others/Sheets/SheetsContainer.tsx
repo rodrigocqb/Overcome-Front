@@ -19,6 +19,7 @@ export default function SheetsContainer({
           title={value.title}
           createdAt={value.createdAt}
           queryClient={queryClient}
+          data={value}
         />
       ))}
     </Container>

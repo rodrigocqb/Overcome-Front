@@ -1,15 +1,18 @@
 export type SheetWithExercises = {
   title: string;
-  userId: number;
+  id: number;
   createdAt: Date;
   updatedAt: Date;
+  userId: number;
   SheetExercise: {
-    Exercise: {
-      id: number;
-      name: string;
-    };
+      weight: number;
+      reps: number;
+      sets: number;
+      Exercise: {
+          id: number;
+          name: string;
+      };
   }[];
-  id: number;
 };
 
 export type Sheet = {
