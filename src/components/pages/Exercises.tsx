@@ -102,6 +102,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: fit-content;
+  min-height: 400px;
 `;
 
 const Title = styled.div`
