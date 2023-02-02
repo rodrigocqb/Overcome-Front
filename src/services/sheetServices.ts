@@ -21,7 +21,7 @@ export async function postSheet(body: { title: string }): Promise<Sheet> {
 
 export async function putSheetExercises({ sheetId, exerciseBody }: PutSheetExercisesParams) {
   const config = createAuthorizationHeader();
-  const response = await put(`/sheets/${sheetId}`, exerciseBody, config);
+  const response = await put(`/sheets/${sheetId}`, { exerciseBody }, config);
   return response.data;
 }
 

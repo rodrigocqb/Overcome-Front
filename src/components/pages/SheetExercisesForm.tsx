@@ -2,13 +2,15 @@ import Footer from "components/others/Footer";
 import Header from "components/others/Header";
 import SheetExercisesContainer from "components/others/SheetExercisesForm/SheetExercisesContainer";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 export default function SheetExercisesForm() {
   const sheetTitle: string = useLocation().state?.title;
 
   const navigate = useNavigate();
+
+  const { sheetId } = useParams();
 
   useEffect(() => {
     if (sheetTitle === undefined) {
@@ -21,7 +23,10 @@ export default function SheetExercisesForm() {
       <Header />
       <MainSection>
         <Wrapper>
-          <SheetExercisesContainer name={sheetTitle} />
+          <SheetExercisesContainer
+            name={sheetTitle}
+            sheetId={Number(sheetId)}
+          />
         </Wrapper>
       </MainSection>
       <Footer />

@@ -4,14 +4,52 @@ import styled from "styled-components";
 import { SheetExerciseBody } from "types/sheetTypes";
 import Searchbar from "./Searchbar";
 import ExerciseDataForm from "./ExerciseDataForm";
+import { toast } from "react-toastify";
+import { putSheetExercises } from "services/sheetServices";
+import { useNavigate } from "react-router-dom";
 
-export default function SheetExercisesContainer({ name }: { name: string }) {
+export default function SheetExercisesContainer({
+  name,
+  sheetId,
+}: {
+  name: string;
+  sheetId: number;
+}) {
   const [sheetExercises, setSheetExercises] = useState<
     (SheetExerciseBody & { name: string })[]
       >([]);
   const [exerciseData, setExerciseData] = useState<
     (SheetExerciseBody & { name: string }) | null
       >(null);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
+  const navigate = useNavigate();
+
+  const exerciseBody: SheetExerciseBody[] = sheetExercises.map((data) => {
+    const body: SheetExerciseBody & { name?: string } = { ...data };
+    delete body.name;
+    body.weight = data.weight * 10;
+    return body;
+  });
+
+  async function saveSheetExercises() {
+    if (isSubmitDisabled) {
+      return;
+    }
+    setIsSubmitDisabled(true);
+    toast.loading("Enviando dados", { toastId: "loading" });
+
+    try {
+      await putSheetExercises({ exerciseBody, sheetId });
+      toast.dismiss("loading");
+      navigate("/sheets");
+    }
+    catch (error) {
+      toast.dismiss("loading");
+      toast.error("Houve um erro ao tentar salvar sua ficha!");
+      setIsSubmitDisabled(false);
+    }
+  }
 
   return (
     <Container>
@@ -43,7 +81,7 @@ export default function SheetExercisesContainer({ name }: { name: string }) {
               )}
             </>
           </ExercisesWrapper>
-          <SaveButton>SALVAR FICHA</SaveButton>
+          <SaveButton onClick={saveSheetExercises}>SALVAR FICHA</SaveButton>
         </>
       )}
     </Container>
