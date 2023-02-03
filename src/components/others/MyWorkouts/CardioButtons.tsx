@@ -3,6 +3,7 @@ import { QueryClient, useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { postWorkout } from "services/workoutServices";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { Cardio } from "types/workoutTypes";
 
 export default function CardioButtons({
@@ -12,29 +13,56 @@ export default function CardioButtons({
 }) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  const cardioWorkoutMutation = useMutation(() => postWorkout({ cardio }), {
+  const cardioWorkoutMutation = useMutation((exercise: Cardio) => postWorkout({ cardio: exercise }), {
     onSuccess: () => queryClient.refetchQueries("workouts"),
   });
-  let cardio: Cardio;
 
   async function saveCardioWorkout(exercise: Cardio) {
     if (isSubmitDisabled) {
       return;
     }
 
-    cardio = exercise;
     setIsSubmitDisabled(true);
-    toast.loading("Enviando dados", { toastId: "loading" });
-    try {
-      await cardioWorkoutMutation.mutateAsync();
-      toast.dismiss("loading");
-      toast.success("Treino salvo com sucesso!");
-      setIsSubmitDisabled(false);
+
+    Swal.fire({
+      title: "Cardio",
+      text: `Você quer marcar um cardio de ${returnNameInPortuguese(exercise)}?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim!",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        toast.loading("Enviando dados", { toastId: "loading" });
+        try {
+          await cardioWorkoutMutation.mutateAsync(exercise);
+          toast.dismiss("loading");
+          toast.success("Treino salvo com sucesso!");
+          setIsSubmitDisabled(false);
+        }
+        catch (error) {
+          toast.dismiss("loading");
+          toast.error("Houve um erro ao tentar salvar seu treino!");
+          setIsSubmitDisabled(false);
+        }
+      }
+      else {
+        setIsSubmitDisabled(false);
+      }
+    });
+  }
+
+  function returnNameInPortuguese(name: Cardio) {
+    if (name === Cardio.CYCLING) {
+      return "Bike";
     }
-    catch (error) {
-      toast.dismiss("loading");
-      toast.error("Houve um erro ao tentar salvar seu treino!");
-      setIsSubmitDisabled(false);
+    if (name === Cardio.SWIMMING) {
+      return "Natação";
+    }
+    if (name === Cardio.RUNNING) {
+      return "Corrida";
     }
   }
 
