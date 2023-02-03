@@ -9,13 +9,11 @@ import { Journal } from "types/journalTypes";
 type JournalFormParams = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   queryClient: QueryClient;
-  journals: Journal[] | undefined;
 };
 
 export default function JournalForm({
   setShowForm,
   queryClient,
-  journals,
 }: JournalFormParams) {
   const [text, setText] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
@@ -26,18 +24,9 @@ Você pode falar do seu sono,
 como tem sido fazer exercícios 
 ou da sua vida num geral :)`;
 
-  const queryData = () => {
-    if (journals === undefined) {
-      return [];
-    }
-    else {
-      return journals;
-    }
-  };
-
   const postJournalMutation = useMutation(() => postJournal(text), {
-    onSuccess: (data) => {
-      queryClient.setQueryData("journals", [...queryData(), data]);
+    onSuccess: () => {
+      queryClient.refetchQueries("journals");
     },
   });
 

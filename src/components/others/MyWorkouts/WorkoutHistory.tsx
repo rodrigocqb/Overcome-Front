@@ -1,8 +1,20 @@
 import dayjs from "dayjs";
 import styled from "styled-components";
-import { WorkoutData } from "types/workoutTypes";
+import { Cardio, WorkoutData } from "types/workoutTypes";
 
 export default function WorkoutHistory({ data }: { data: WorkoutData[] }) {
+  function returnNameInPortuguese(name: Cardio) {
+    if (name === Cardio.CYCLING) {
+      return "Bike";
+    }
+    if (name === Cardio.SWIMMING) {
+      return "Natação";
+    }
+    if (name === Cardio.RUNNING) {
+      return "Corrida";
+    }
+  }
+
   return (
     <Container>
       {data.length === 0 ? (
@@ -15,7 +27,11 @@ export default function WorkoutHistory({ data }: { data: WorkoutData[] }) {
         <>
           {data.map((value) => (
             <WorkoutWrapper key={value.id}>
-              <h1>{value.cardio ? value.cardio : value.Sheet.title}</h1>
+              <h1>
+                {value.cardio
+                  ? returnNameInPortuguese(value.cardio)
+                  : value.Sheet?.title}
+              </h1>
               <h2>{dayjs(value.createdAt).format("DD/MM/YY")}</h2>
             </WorkoutWrapper>
           ))}

@@ -41,7 +41,6 @@ export default function Journals() {
                 <JournalForm
                   queryClient={queryClient}
                   setShowForm={setShowForm}
-                  journals={data}
                 />
               ) : (
                 <>

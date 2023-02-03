@@ -3,11 +3,11 @@ import background from "../../assets/myWorkouts/myWorkoutsBgOpacity.png";
 import mainBackground from "../../assets/myWorkouts/myWorkoutsBg.png";
 import Header from "components/others/Header";
 import Footer from "components/others/Footer";
-import Cardio from "components/others/MyWorkouts/Cardio";
 import { getWorkouts } from "services/workoutServices";
 import { useQuery, useQueryClient } from "react-query";
 import LoadingPlaceholder from "components/others/LoadingPlaceholder";
 import WorkoutHistory from "components/others/MyWorkouts/WorkoutHistory";
+import CardioButtons from "components/others/MyWorkouts/CardioButtons";
 
 export default function MyWorkouts() {
   const { data, isLoading } = useQuery("workouts", getWorkouts, {
@@ -31,7 +31,7 @@ export default function MyWorkouts() {
       <MainSection>
         <Wrapper>
           <Title>MEUS TREINOS</Title>
-          <Cardio queryClient={queryClient} />
+          <CardioButtons queryClient={queryClient} />
           {data !== undefined && <WorkoutHistory data={data} />}
         </Wrapper>
       </MainSection>
