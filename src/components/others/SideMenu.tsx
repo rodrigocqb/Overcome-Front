@@ -71,13 +71,13 @@ const Background = styled.div<{ showMenu: boolean }>`
   top: 0;
   left: 0;
   z-index: 10;
+  padding-left: 114px;
 `;
 
 const Container = styled.div`
-  padding-top: 76px;
+  padding-top: 27vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   color: #ffffff;
   font-size: 20px;
 
@@ -86,6 +86,7 @@ const Container = styled.div`
     font-size: 25px;
     text-decoration-line: underline;
     margin-bottom: 41px;
+    word-break: break-word;
   }
 
   p {
