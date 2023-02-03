@@ -44,11 +44,7 @@ export default function Sheets() {
           </ButtonWrapper>
 
           {showForm ? (
-            <SheetForm
-              queryClient={queryClient}
-              sheets={data}
-              setShowForm={setShowForm}
-            />
+            <SheetForm />
           ) : (
             <>
               <Title>
@@ -78,7 +74,7 @@ const Container = styled.main`
   position: relative;
   min-height: 100vh;
   justify-content: center;
-  background-color: #E5DED6;
+  background-color: #e5ded6;
   background-image: url(${background});
   background-size: 100%;
   background-position: 0 0;
