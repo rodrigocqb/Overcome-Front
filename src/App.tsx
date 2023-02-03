@@ -18,6 +18,7 @@ import Journals from "components/pages/Journals";
 import JournalPage from "components/pages/JournalPage";
 import SideMenu from "components/others/SideMenu";
 import SideMenuContextProvider from "contexts/SideMenuContext";
+import MyWorkouts from "components/pages/MyWorkouts";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -83,6 +84,10 @@ export default function App() {
                   <Route
                     path="/journals/:journalId"
                     element={<JournalPage />}
+                  />
+                  <Route
+                    path="/my-workouts"
+                    element={<MyWorkouts />}
                   />
                 </Route>
               </Routes>
