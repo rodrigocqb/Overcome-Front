@@ -1,24 +1,13 @@
 import { useState } from "react";
-import { QueryClient, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { postSheet } from "services/sheetServices";
 import styled from "styled-components";
-import { SheetWithExercises } from "types/sheetTypes";
 import { Button, StyledForm } from "../Exercises/ExerciseForm";
 import { InputWrapper } from "../Objective/ObjectiveForm";
 
-type SheetFormParams = {
-  queryClient: QueryClient;
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  sheets: SheetWithExercises[] | undefined;
-};
-
-export default function SheetForm({
-  queryClient,
-  setShowForm,
-  sheets,
-}: SheetFormParams) {
+export default function SheetForm() {
   const [form, setForm] = useState({
     title: "",
   });
