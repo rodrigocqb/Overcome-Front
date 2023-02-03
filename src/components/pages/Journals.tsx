@@ -41,7 +41,8 @@ export default function Journals() {
                 <JournalForm
                   queryClient={queryClient}
                   setShowForm={setShowForm}
-                  journals={data} />
+                  journals={data}
+                />
               ) : (
                 <>
                   {data.length === 0 ? (
@@ -49,7 +50,10 @@ export default function Journals() {
                       Você ainda não tem diários. Comece a escrever um.
                     </SpanWrapper>
                   ) : (
-                    <JournalContainer journals={data} />
+                    <JournalContainer
+                      journals={data}
+                      queryClient={queryClient}
+                    />
                   )}
                   <ButtonSection
                     showForm={showForm}
@@ -104,7 +108,7 @@ const Title = styled.div`
   font-weight: 900;
   width: 100%;
   color: #ffffff;
-  margin-top: 38px;
+  margin-top: 70px;
   text-align: center;
   width: 258px;
   margin-bottom: 21px;
@@ -115,7 +119,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: fit-content;
-  min-height: 448px;
+  min-height: 400px;
 `;
 
 const ButtonSection = styled(ButtonWrapper)`
