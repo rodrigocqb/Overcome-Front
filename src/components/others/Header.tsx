@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import overcome from "../../assets/overcome.svg";
 import menu from "../../assets/menu.svg";
+import { useSideMenuContext } from "contexts/SideMenuContext";
 
 export default function Header() {
+  const { setShowMenu } = useSideMenuContext();
+
   return (
     <Container>
       <StyledTitle
         src={overcome}
         alt=""
       />
-      <Menu
+      <MenuIcon
         src={menu}
         alt="menu"
+        onClick={() => setShowMenu((old) => !old)}
       />
     </Container>
   );
@@ -35,7 +39,7 @@ const StyledTitle = styled.img`
   height: 55%;
 `;
 
-const Menu = styled.img`
+export const MenuIcon = styled.img`
   position: absolute;
   top: 25px;
   right: 20px;
