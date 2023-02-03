@@ -15,6 +15,7 @@ import Sheets from "components/pages/Sheets";
 import SheetExercisesForm from "components/pages/SheetExercisesForm";
 import Workout from "components/pages/Workout";
 import Journals from "components/pages/Journals";
+import JournalPage from "components/pages/JournalPage";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -74,6 +75,10 @@ export default function App() {
                 <Route
                   path="/journals"
                   element={<Journals />}
+                />
+                <Route
+                  path="/journals/:journalId"
+                  element={<JournalPage />}
                 />
               </Route>
             </Routes>

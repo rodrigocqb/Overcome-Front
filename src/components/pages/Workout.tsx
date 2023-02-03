@@ -17,15 +17,17 @@ export default function Workout() {
     }
   });
 
-  return <Container>
-    <Header />
-    <MainSection>
-      <Wrapper>
-        <WorkoutContainer sheet={sheetData} />
-      </Wrapper>
-    </MainSection>
-    <Footer />
-  </Container>;
+  return (
+    <Container>
+      <Header />
+      <MainSection>
+        <Wrapper>
+          <WorkoutContainer sheet={sheetData} />
+        </Wrapper>
+      </MainSection>
+      <Footer />
+    </Container>
+  );
 }
 
 const Container = styled.main`

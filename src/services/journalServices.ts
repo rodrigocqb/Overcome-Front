@@ -3,6 +3,7 @@ import {
   deleteReq,
   get,
   post,
+  put,
 } from "helpers/request";
 import { Journal } from "types/journalTypes";
 
@@ -21,5 +22,17 @@ export async function postJournal(text: string): Promise<Journal> {
 export async function deleteJournal(id: number): Promise<void> {
   const config = createAuthorizationHeader();
   await deleteReq(`journals/${id}`, config);
+  return;
+}
+
+export async function putUpdateJournal({
+  id,
+  text,
+}: {
+  id: number;
+  text: string;
+}): Promise<void> {
+  const config = createAuthorizationHeader();
+  await put(`journals/${id}`, { text }, config);
   return;
 }

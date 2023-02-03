@@ -70,7 +70,7 @@ ou da sua vida num geral :)`;
     <>
       <Container>
         <DateWrapper>{today}</DateWrapper>
-        <TextWrapper
+        <TextAreaWrapper
           name="text"
           placeholder={placeholderText}
           value={text}
@@ -100,7 +100,7 @@ const DateWrapper = styled.h2`
   text-align: end;
 `;
 
-const TextWrapper = styled.textarea`
+export const TextAreaWrapper = styled.textarea`
   padding: 10px;
   margin-top: 35px;
   width: 100%;
@@ -114,9 +114,10 @@ const TextWrapper = styled.textarea`
   resize: none;
   border-radius: 12px;
   color: #757575;
+  font-size: 16px;
 `;
 
-const JournalButton = styled.div`
+export const JournalButton = styled.div`
   width: 184px;
   height: 45px;
   background-color: #04455b;
@@ -126,4 +127,6 @@ const JournalButton = styled.div`
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
 `;

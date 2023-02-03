@@ -5,3 +5,9 @@ export type Journal = {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export type JournalPageParams = {
+    id: number;
+    date: string;
+    text: string;
+}

@@ -1,4 +1,5 @@
 import { QueryClient, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deleteJournal } from "services/journalServices";
 import styled from "styled-components";
@@ -58,10 +59,16 @@ export default function JournalComponent({
     });
   }
 
+  const navigate = useNavigate();
+
+  function readJournal() {
+    navigate(`/journals/${id}`, { state: { data: { id, date, text } } });
+  }
+
   return (
     <Wrapper>
-      <p>{date}</p>
-      <span onClick={handleDelete} >x</span>
+      <p onClick={readJournal}>{date}</p>
+      <span onClick={handleDelete}>x</span>
     </Wrapper>
   );
 }
