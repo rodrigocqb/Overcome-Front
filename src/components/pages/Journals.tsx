@@ -3,13 +3,66 @@ import mainBackground from "../../assets/journals/journalsBg.png";
 import styled from "styled-components";
 import Header from "components/others/Header";
 import Footer from "components/others/Footer";
+import { useQuery, useQueryClient } from "react-query";
+import { getJournals } from "services/journalServices";
+import LoadingPlaceholder from "components/others/LoadingPlaceholder";
+import JournalContainer from "components/others/Journals/JournalContainer";
+import { ButtonWrapper, SpanWrapper } from "./Exercises";
+import { useState } from "react";
+import JournalForm from "components/others/Journals/JournalForm";
 
 export default function Journals() {
+  const [showForm, setShowForm] = useState(false);
+
+  const { data, isLoading } = useQuery("journals", getJournals, {
+    retry: false,
+  });
+  const queryClient = useQueryClient();
+
+  if (isLoading) {
+    return (
+      <Container>
+        <Header />
+        <LoadingPlaceholder />
+        <Footer />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Header />
       <MainSection>
-        <Wrapper></Wrapper>
+        <Wrapper>
+          <Title>DIÁRIOS</Title>
+          {data !== undefined && (
+            <>
+              {showForm ? (
+                <JournalForm
+                  queryClient={queryClient}
+                  setShowForm={setShowForm}
+                  journals={data} />
+              ) : (
+                <>
+                  {data.length === 0 ? (
+                    <SpanWrapper>
+                      Você ainda não tem diários. Comece a escrever um.
+                    </SpanWrapper>
+                  ) : (
+                    <JournalContainer journals={data} />
+                  )}
+                  <ButtonSection
+                    showForm={showForm}
+                    onClick={() => setShowForm(!showForm)}
+                  >
+                    <div>+</div>
+                    <p>novo diário</p>
+                  </ButtonSection>
+                </>
+              )}
+            </>
+          )}
+        </Wrapper>
       </MainSection>
       <Footer />
     </Container>
@@ -51,9 +104,10 @@ const Title = styled.div`
   font-weight: 900;
   width: 100%;
   color: #ffffff;
-  margin-top: 18px;
+  margin-top: 38px;
   text-align: center;
   width: 258px;
+  margin-bottom: 21px;
 `;
 
 const Wrapper = styled.div`
@@ -62,4 +116,12 @@ const Wrapper = styled.div`
   align-items: center;
   height: fit-content;
   min-height: 448px;
+`;
+
+const ButtonSection = styled(ButtonWrapper)`
+  margin-top: 21px;
+  div {
+    background-color: #6c9db2;
+    margin-right: 7px;
+  }
 `;
