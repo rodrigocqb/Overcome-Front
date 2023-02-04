@@ -19,6 +19,7 @@ import JournalPage from "components/pages/JournalPage";
 import SideMenu from "components/others/SideMenu";
 import SideMenuContextProvider from "contexts/SideMenuContext";
 import MyWorkouts from "components/pages/MyWorkouts";
+import ErrorFallback from "components/pages/ErrorFallback";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -90,6 +91,10 @@ export default function App() {
                     element={<MyWorkouts />}
                   />
                 </Route>
+                <Route
+                  path="*"
+                  element={<ErrorFallback />}
+                />
               </Routes>
             </BrowserRouter>
           </SideMenuContextProvider>
