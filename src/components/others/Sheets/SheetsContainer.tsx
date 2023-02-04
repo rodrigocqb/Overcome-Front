@@ -29,7 +29,8 @@ export default function SheetsContainer({
 const Container = styled.div`
   margin-top: 28px;
   width: 290px;
-  height: 328px;
+  height: 39vh;
+  max-height: 328px;
   background-color: #b5aea4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;

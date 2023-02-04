@@ -20,9 +20,7 @@ export default function JournalForm({
 
   const today = dayjs().format("DD/MM/YY");
   const placeholderText = `Coloque aqui como você está se sentindo, seus anseios ou o que você preferir. 
-Você pode falar do seu sono, 
-como tem sido fazer exercícios 
-ou da sua vida num geral :)`;
+Você pode falar do seu sono, como tem sido fazer exercícios ou da sua vida num geral :)`;
 
   const postJournalMutation = useMutation(() => postJournal(text), {
     onSuccess: () => {
@@ -93,7 +91,8 @@ export const TextAreaWrapper = styled.textarea`
   padding: 10px;
   margin-top: 35px;
   width: 100%;
-  height: 235px;
+  height: 27vh;
+  max-height: 235px;
   word-break: break-word;
   outline: none;
   font-family: "Montserrat";
@@ -108,7 +107,7 @@ export const TextAreaWrapper = styled.textarea`
 
 export const JournalButton = styled.div`
   width: 184px;
-  height: 45px;
+  min-height: 45px;
   background-color: #04455b;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 23.5px;

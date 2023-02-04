@@ -107,7 +107,7 @@ const Title = styled.div`
   font-weight: 900;
   width: 100%;
   color: #ffffff;
-  margin-top: 70px;
+  margin-top: 40px;
   text-align: center;
   width: 258px;
   margin-bottom: 21px;
