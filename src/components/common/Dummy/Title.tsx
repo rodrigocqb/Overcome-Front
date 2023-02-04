@@ -11,6 +11,7 @@ export default function TitleImage() {
 }
 
 const Title = styled.img`
-  font-size: 60px;
+  width: 335px;
+  height: 87px;
   margin-bottom: 10px;
 `;
