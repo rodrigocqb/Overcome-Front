@@ -46,7 +46,7 @@ export default function WorkoutContainer({
           <WorkoutExercise
             key={value.Exercise?.id}
             name={value.Exercise?.name}
-            weight={value.weight}
+            weight={value.weight / 10}
             reps={value.reps}
             sets={value.sets}
           />

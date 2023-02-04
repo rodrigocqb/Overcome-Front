@@ -76,7 +76,7 @@ export default function ExerciseDataForm({
             placeholder="reps"
             value={showPlaceholder(exerciseData.reps)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange({ name: e.target.name, value: e.target.value })
+              handleChange({ name: e.target.name, value: Number(e.target.value) })
             }
             min="0"
             step="1"
@@ -87,7 +87,7 @@ export default function ExerciseDataForm({
             placeholder="sets"
             value={showPlaceholder(exerciseData.sets)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange({ name: e.target.name, value: e.target.value })
+              handleChange({ name: e.target.name, value: Number(e.target.value) })
             }
             min="0"
             step="1"
