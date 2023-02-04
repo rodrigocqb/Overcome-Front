@@ -11,6 +11,7 @@ import { useMutation } from "react-query";
 import background from "../../assets/background.png";
 import { GoogleButton } from "components/common/Dummy/GoogleButton";
 import google from "../../assets/google.svg";
+import useToken from "hooks/useToken";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -23,12 +24,13 @@ export default function SignUp() {
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  const { getTokenWithGoogleOAuth, userData } = useUserContext();
+  const { getTokenWithGoogleOAuth } = useUserContext();
+  const token = useToken();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userData) {
+    if (token) {
       return navigate("/");
     }
   }, []);
