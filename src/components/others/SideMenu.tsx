@@ -67,7 +67,7 @@ const Background = styled.div<{ showMenu: boolean }>`
   background-color: #66acc3;
   height: 100vh;
   width: 100vw;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
