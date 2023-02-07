@@ -4,7 +4,10 @@ Overcome is a web application where anyone can start working out without judgeme
 [Screencast from 07-02-2023 13:55:36.webm](https://user-images.githubusercontent.com/106849571/217312636-992d3dce-d12e-4b6b-81a9-39106d51a575.webm)
 
 You can use the app here: http://100.25.221.19/
+
 Or if you are solely interested in the back-end: http://100.25.221.19/api
+
+You can check the API documentation at https://github.com/rodrigocqb/Overcome-Back
 
 ## About
 Overcome is a mental health focused fitness application. Below are the implemented features:
