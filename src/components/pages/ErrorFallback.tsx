@@ -37,7 +37,7 @@ const Container = styled.main`
 const MainSection = styled.section`
   margin-top: 76px;
   width: 100%;
-  height: calc(100vh - 189px);
+  height: calc(var(--doc-height) - 189px);
   border-radius: 51px 51px 36px 36px;
   display: flex;
   flex-direction: column;
