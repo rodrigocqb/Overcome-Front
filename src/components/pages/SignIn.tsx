@@ -122,7 +122,7 @@ const Container = styled.div`
     justify-content: center;
 
     width: calc(100vw - (100vw - 100%));
-    min-height: 100vh;
+    height: var(--doc-height);
 
     padding: 20px;
 
