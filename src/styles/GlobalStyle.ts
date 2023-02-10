@@ -50,7 +50,7 @@ table {
   :root {
     --fontsize: 26px;
 
-    --doc-heigth: 100%;
+    --doc-height: 100%;
   }
 
   /* Hide scrollbar */
@@ -64,9 +64,13 @@ table {
 
   html,
   body {
-    height: var(--doc-heigth);
+    height: var(--doc-height);
     background-color: #D6C9B6;
     font-family: "Montserrat", sans-serif;
+  }
+
+  #root {
+    height: var(--doc-height);
   }
 
   * {

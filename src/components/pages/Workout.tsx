@@ -32,7 +32,7 @@ export default function Workout() {
 
 const Container = styled.main`
   position: relative;
-  min-height: 100vh;
+  height: var(--doc-height);
   justify-content: center;
   background-color: #b1cbd6;
 `;

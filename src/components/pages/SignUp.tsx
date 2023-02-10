@@ -131,7 +131,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     width: calc(100vw - (100vw - 100%));
-    height: 100vh;
+    height: var(--doc-height);
 
     padding: 20px;
 

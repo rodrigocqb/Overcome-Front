@@ -37,7 +37,7 @@ export default function Home() {
 
 const Container = styled.main`
   position: relative;
-  min-height: 100vh;
+  height: var(--doc-height);
   justify-content: center;
   background-image: url(${background});
   background-size: cover;

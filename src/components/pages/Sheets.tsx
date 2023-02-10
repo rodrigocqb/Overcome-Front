@@ -72,7 +72,7 @@ export default function Sheets() {
 
 const Container = styled.main`
   position: relative;
-  min-height: 100vh;
+  height: var(--doc-height);
   justify-content: center;
   background-color: #e5ded6;
   background-image: url(${background});

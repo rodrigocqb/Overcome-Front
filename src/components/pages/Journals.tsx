@@ -74,7 +74,7 @@ export default function Journals() {
 
 const Container = styled.main`
   position: relative;
-  min-height: 100vh;
+  height: var(--doc-height);
   justify-content: center;
   background-color: #e4e4e4;
   background-image: url(${background});
