@@ -65,12 +65,15 @@ table {
   html,
   body {
     height: var(--doc-height);
-    background-color: #D6C9B6;
     font-family: "Montserrat", sans-serif;
   }
 
   #root {
     height: var(--doc-height);
+  }
+
+  body.swal2-height-auto {
+    height: var(--doc-height) !important;
   }
 
   * {
