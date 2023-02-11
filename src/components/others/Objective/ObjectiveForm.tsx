@@ -75,6 +75,13 @@ export default function ObjectiveForm({
     }
   }
 
+  function showPlaceholder(value: number) {
+    if (value === 0) {
+      return "";
+    }
+    return value;
+  }
+
   return (
     <Container>
       <Header />
@@ -100,7 +107,7 @@ export default function ObjectiveForm({
               }
               type="number"
               step="0.1"
-              value={form.currentWeight}
+              value={showPlaceholder(form.currentWeight)}
             />
           </InputWrapper>
           <InputWrapper>
@@ -112,7 +119,7 @@ export default function ObjectiveForm({
               }
               type="number"
               step="0.1"
-              value={form.goalWeight}
+              value={showPlaceholder(form.goalWeight)}
             />
           </InputWrapper>
           <SubmitButton>ATUALIZAR OBJETIVO</SubmitButton>
