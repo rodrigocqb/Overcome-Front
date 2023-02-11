@@ -9,12 +9,15 @@ import mainBackground from "../../assets/objective/objectivebackground.png";
 import Header from "components/others/Header";
 import Footer from "components/others/Footer";
 import Sheets from "./Sheets";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { isLoading, error } = useQuery("objectives", getObjective, {
     retry: false,
     onError: (err: AxiosError) => err,
   });
+
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -30,6 +33,11 @@ export default function Home() {
 
   if (error?.response?.status === HttpStatusCode.NotFound) {
     return <Objective hasObjective={false} />;
+  }
+
+  if (error?.response?.status === HttpStatusCode.Unauthorized) {
+    localStorage.removeItem("user");
+    navigate("/sign-in");
   }
 
   return <Sheets />;
