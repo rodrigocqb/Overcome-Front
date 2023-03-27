@@ -36,7 +36,7 @@ Overcome is a mental health focused fitness application. Below are the implement
 - Create new journals
 
 ## Technologies
-The following tools and frameworks were used in the construction of this back-end:
+The following tools and frameworks were used in the construction of this front-end:
 <p>
   <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
   <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
